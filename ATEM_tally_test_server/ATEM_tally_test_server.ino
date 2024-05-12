@@ -1,21 +1,5 @@
 /*
-Copyright (C) 2020 Aron N. Het Lam, aronhetlam@gmail.com
-
-This program makes an ESP8266 into a wireless tally light system for ATEM switchers,
-by using Kasper Skårhøj's (<https://skaarhoj.com>) ATEM clinet libraries for Arduino.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+This is a fork of the original work by Aron N. Het Lam where I've added support for the onboard OLED display of the wifi kit 8 by heltec.
 */
 
 // #define DEBUG_LED_STRIP
@@ -674,7 +658,7 @@ void handleRoot() {
     html += settings.tallyGateway[2];
     html += "\"required/>. <input class=\"tIP\"type=\"text\"size=\"3\"maxlength=\"3\"name=\"gate4\"pattern=\"\\d{0,3}\"value=\"";
     html += settings.tallyGateway[3];
-    html += "\"required/></td></tr><tr><td><br></td></tr><tr><td/><td style=\"float: right;\"><input type=\"submit\"value=\"Save Changes\"/></td></tr></form><tr bgcolor=\"#cccccc\"style=\"font-size: .8em;\"><td colspan=\"3\"><p>&nbsp;&copy; 2020-2021 <a href=\"https://aronhetlam.github.io/\">Aron N. Het Lam</a></p><p>&nbsp;Based on ATEM libraries for Arduino by <a href=\"https://www.skaarhoj.com/\">SKAARHOJ</a></p></td></tr></table></body></html>";
+    html += "\"required/></tr><tr><td><br></td></tr><tr><td/><td style=\"float: right;\"><input type=\"submit\"value=\"Save Changes\"/></td></tr></form><tr bgcolor=\"#cccccc\"style=\"font-size: .8em;\"><td colspan=\"3\"><p>&nbsp;&copy; 2023-2024 Francesco Cucchiaro; ATEM software based on the work by <a href=\"https://aronhetlam.github.io/\">Aron N. Het Lam</a></p><p>&nbsp; and <a href=\"https://www.skaarhoj.com/\">SKAARHOJ</a></p></td></tr></table></body></html>";
     server.send(200, "text/html", html);
 }
 

@@ -1,5 +1,3 @@
-//Include libraries:
-
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
 
@@ -113,7 +111,7 @@ void setup() {
 
     setBothLEDs(LED_ORANGE);
 
-    //Setup current-measuring pin - Commented out for users without batteries
+    //Setup current-measuring pin
     pinMode(A0, INPUT);
 
     //Start Serial
@@ -141,10 +139,10 @@ void setup() {
     EEPROM.get(0, settings);
 
     //MANUAL SETTINGS
-    settings.switcherIP[0] = 192;
-    settings.switcherIP[1] = 168;
-    settings.switcherIP[2] = 1;
-    settings.switcherIP[3] = 9;    
+    //settings.switcherIP[0] = 192;
+    //settings.switcherIP[1] = 168;
+    //settings.switcherIP[2] = 1;
+    //settings.switcherIP[3] = 9;    
 
     // String tName = "A";
     // tName.toCharArray(settings.tallyName, (uint8_t)32);
@@ -284,6 +282,7 @@ void loop() {
         Serial.println("------------------------");
         Serial.println("WiFi connection lost...");
         changeState(STATE_CONNECTING_TO_WIFI);
+        nscreen("Connection LOST","", "", "");
 
         //Force atem library to reset connection, in order for status to read correctly on website.
         atemSwitcher.begin(settings.switcherIP);
@@ -298,6 +297,8 @@ void loop() {
     server.handleClient();
 }
 
+
+//Function to print the display status once we are connected to the wifi and to the switcher 
 void screenMain(int color) {
   display.clearDisplay();
   display.setTextSize(1);
@@ -332,6 +333,7 @@ void screenMain(int color) {
 }
 
 
+//function used to print "status" messages to the display
 void nscreen(String line1, String line2, String line3, String line4) {
     display.display();
     display.clearDisplay();
@@ -608,7 +610,7 @@ void handleRoot() {
     html += settings.switcherIP[2];
     html += "\"required/>. <input class=\"IP\"type=\"text\"size=\"3\"maxlength=\"3\"name=\"aIP4\"pattern=\"\\d{0,3}\"value=\"";
     html += settings.switcherIP[3];
-    html += "\"required/></tr><tr><td><br></td></tr><tr><td/><td style=\"float: right;\"><input type=\"submit\"value=\"Save Changes\"/></td></tr></form><tr bgcolor=\"#cccccc\"style=\"font-size: .8em;\"><td colspan=\"3\"><p>&nbsp;&copy; 2020-2022 <a href=\"https://aronhetlam.github.io/\">Aron N. Het Lam</a></p><p>&nbsp;Based on ATEM libraries for Arduino by <a href=\"https://www.skaarhoj.com/\">SKAARHOJ</a></p></td></tr></table></body></html>";
+    html += "\"required/></tr><tr><td><br></td></tr><tr><td/><td style=\"float: right;\"><input type=\"submit\"value=\"Save Changes\"/></td></tr></form><tr bgcolor=\"#cccccc\"style=\"font-size: .8em;\"><td colspan=\"3\"><p>&nbsp;&copy; 2023-2024 Francesco Cucchiaro; ATEM software based on the work by <a href=\"https://aronhetlam.github.io/\">Aron N. Het Lam</a></p><p>&nbsp; and <a href=\"https://www.skaarhoj.com/\">SKAARHOJ</a></p></td></tr></table></body></html>";
     server.send(200, "text/html", html);
 }
 
